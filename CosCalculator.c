@@ -25,12 +25,10 @@ int main()
 			result = hesaplanan son degeri icinde tutan degisken
 
 		*/
-		int n; // Taylor serisinde Accuray(Dogruluk) arttirmak icin isleme katilan eleman sayisini belirten degisken
+		int n = 15; // Taylor serisinde Accuracy(Dogruluk) arttirmak icin isleme katilan eleman sayisini belirten degisken
 		printf("Lutfen derece cinsinden cos icine girilecek degeri yaziniz: ");
 		scanf("%f", &degree); //kullanici tarafindan girilecek olan degeri okuyan fonksiyon
-		printf("Taylor serisinde Toplanacak eleman sayisi arttikca elde edilecek sonucun dogrulugu artar.\n");
-		printf("Lutfen toplanmasini istediginiz eleman sayisini giriniz ");
-		scanf("%d", &n);
+		printf("Taylor serisinde Toplanacak eleman sayisi arttikca elde edilecek sonucun dogrulugu artar.\nProgramin stabil calisabilmesi icin eleman sayisi 15 olarak kabul edilmistir.\n");
 		radian = degree * 0.017; // dereceden radyana ceviren islem
 		result = TaylorExp(radian, n); //asagida cos'un taylor serisi ile hesaplanaması için gerekli islemleri yapıp sonucu ceviren fonksiyonu cagirip result degiskeni icinde tutan islem
 		printf("Taylor serisi ile bulunan sonuc: %f\n", result);//sonucu kullaniciya gosteren fonksiyon
@@ -50,18 +48,10 @@ float TaylorExp(float radian, int n) { //Cos'u hesaplayan fonksiyon
 		for (int j = 2 * i; j > 0; j--) { // faktoriyel hesaplayan dongu
 			factorial = factorial * j;
 		}
-		if (i % 2 == 0) {
-			/*
+	
 			
-				burada cos'un acilimda bir islem + bir digeri - oldugu icin index degeri cift iken eleman pozitif
-				tek iken ise negatif ataması yapılıp taylor serisi simüle ediliyor.
-
-			*/
-			result = result + (pow(radian, 2 * i) / factorial); //+((x ^ 2) / n!)
-		}
-		else {
-			result = result - (pow(radian, 2 * i) / factorial); //-((x ^ 2) / n!)
-		}
+			result = result + (pow(-1, i)*(pow(radian, 2 * i) / factorial)); //(-1^n)((x ^ 2) / n!)
+		
 	}
 	return result;//daha sonra fonksiyon buldugumuz sonucu donduruyor
 }
